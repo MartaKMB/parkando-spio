@@ -6,6 +6,8 @@ import history from './history';
 import LoginPage from '../components/LoginPage/LoginPage';
 import WelcomePage from '../components/WelcomePage/WelcomePage';
 import ChoicePage from '../components/ParkingSpaceChoicePage/ChoicePage';
+import ParkingChoicePage from '../components/ParkingChoicePage/ParkingChoicePage';
+
 import ConfirmationPage from '../components/ConfirmationPage/ConfirmationPage';
 
 // const ConfirmationPage = () => <h1>Strona podsumowująca</h1>;
@@ -42,6 +44,10 @@ class App extends Component {
         <Route
           path="/welcome/:userId" 
           render={(props) => <WelcomePage {...props} userName={this.state.userName} />}
+        />
+        <Route
+          path='/choicePaking/:userId'
+          render={(props) => <ParkingChoicePage {...props} choiceHandler={this.choiceParkingHandler} />}
         />
         <Route
           path='/choice/:userId'
