@@ -11,12 +11,13 @@
     // background-color: #32B0E5;
 
     &__map-details { // TODO!
-        background: url('../images/parking_szcz.jpg') no-repeat center center fixed;
-        background-size: cover;
-        // max-width: 360px;
-        width: 100vw;
-        height: 100vh;
-        // max-height: 640px;
+        // background: url('../images/parking_szcz.jpg') no-repeat center center fixed;
+        background: url('../images/parking_szcz.png') no-repeat center;
+        // background-size: cover;
+        max-width: 360px;
+        width: 100%;
+        height: 100%;
+        max-height: 640px;
         position: relative;
     }
 
@@ -35,49 +36,49 @@
             margin: 20px auto;
             font-size: 20px;
             position: absolute;
-            left: 100px;
+            left: 75px;
             border-radius: 50%;
         }
 
         .btn-place { //TODO!
             &--1 {
-                top: -4px;
+                top: -6px;
             }
 
             &--2 {
-                top: 40px;
+                top: 38px;
             }
 
             &--3 {
-                top: 88px;
+                top: 82px;
             }
 
             &--4 {
-                top: 138px;
+                top: 128px;
             }
 
             &--5 {
-                top: 188px;
+                top: 172px;
             }
 
             &--6 {
-                top: 238px;
+                top: 216px;
             }
 
             &--7 {
-                top: 282px;
+                top: 260px;
             }
 
             &--8 {
-                top: 328px;
+                top: 304px;
             }
 
             &--9 {
-                top: 378px;
+                top: 348px;
             }
 
             &--10 {
-                top: 428px;
+                top: 396px;
             }
         }
     }
