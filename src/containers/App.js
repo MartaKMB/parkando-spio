@@ -13,6 +13,7 @@ import ConfirmationPage from '../components/ConfirmationPage/ConfirmationPage';
 class App extends Component {
   state = {
     user: null,
+    userName: '',
     parkingChoice: null
   }
 
@@ -22,9 +23,10 @@ class App extends Component {
     })
   }
 
-  logUser = (cardNumber) => {
+  logUser = (cardNumber, userName) => {
     this.setState({
-      user: cardNumber
+      user: cardNumber,
+      userName: userName,
     })
   }
 
@@ -37,7 +39,10 @@ class App extends Component {
           path="/"
           render={(props) => <LoginPage {...props} logUser={this.logUser} match={matchPath} />}
           exact />
-        <Route path="/welcome/:userId" component={WelcomePage} />
+        <Route
+          path="/welcome/:userId" 
+          render={(props) => <WelcomePage {...props} userName={this.state.userName} />}
+        />
         <Route
           path='/choice/:userId'
           render={(props) => <ChoicePage {...props} choiceHandler={this.choiceHandler} />}
