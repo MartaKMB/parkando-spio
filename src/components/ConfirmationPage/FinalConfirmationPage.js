@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import moment from 'moment';
 
-class FinalConfirmationPage extends Component {
+class FinalConfirmationPage extends Component {    
     render() {
         const date = moment().add(6, 'd').format('DD.MM.YYYY');
         const userName = this.props.userName;
@@ -18,7 +18,14 @@ class FinalConfirmationPage extends Component {
                     <div>{`${userName} ${userSurname}`}</div>
                 </div>
                 <div className="confirmation-container__expiration expiration">
-                    Rezerwacja jest ważna do
+                    Rezerwacja jest ważna 
+                    <div>
+                        {this.props.userType === 'Dzienny'
+                            ? 'w dni robocze'
+                            : 'w weekendy'
+                        }
+                    </div>
+                    do
                     <div className="expiration__date">{date}</div> 
                 </div>
                 <div className="confirmation-container__enjoy">Miłego parkowania!</div>

@@ -114,7 +114,15 @@ class App extends Component {
           />
           <Route
             path="/final-confirmation/:userId/:parkingId"
-            render={(props) => <FinalConfirmationPage {...props} userName={this.state.userName} userSurname={this.state.userSurname} />}
+            render={
+              (props) =>
+              <FinalConfirmationPage
+                {...props}
+                userName={this.state.userName}
+                userSurname={this.state.userSurname}
+                userType={this.state.studentType}
+              />
+            }
             match={matchPath}
           />
         </Switch>
