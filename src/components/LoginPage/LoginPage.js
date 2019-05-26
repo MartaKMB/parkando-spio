@@ -43,8 +43,8 @@ class LoginPage extends Component {
       e.preventDefault();
       const validation = this.formValidation();
       const finddUser = this.finddUser(this.state.cardNumber, this.state.userName, this.state.userSurname);
-      const userPlace = this.userPlaceValidation();
-      const userType = this.userStudentType();
+      const userPlace = this.userParkingSpaceValidation(this.state.cardNumber, this.state.userName, this.state.userSurname);
+      const userType = this.setUserType(this.state.cardNumber, this.state.userName, this.state.userSurname);
     
       if(validation.correct) {
         if(finddUser.length > 0) {
@@ -82,15 +82,15 @@ class LoginPage extends Component {
           })
         }
       } else {
-          this.setState({
-            errors: {
-              userName: !validation.userName,
-              userSurname: !validation.userSurname,
-              cardNumber: !validation.cardNumber,
-            }
-          })
-        }
+        this.setState({
+          errors: {
+            userName: !validation.userName,
+            userSurname: !validation.userSurname,
+            cardNumber: !validation.cardNumber,
+          }
+        })
       }
+    }
     
     formValidation = () => {
       let userName = false;
@@ -120,21 +120,21 @@ class LoginPage extends Component {
     }
 
     finddUser(cardNumber, userName, userSurname) {
-      return this.props.users.filter(user => user.name === userName && user.surname === userSurname && user.card_id === Number(cardNumber));      
+      return this.props.users.filter(user =>
+        user.name === userName && user.surname === userSurname && user.card_id === Number(cardNumber));      
     }
 
-    userPlaceValidation() {
-      const user = this.finddUser(this.state.cardNumber, this.state.userName, this.state.userSurname);
+    userParkingSpaceValidation(cardNumber, userName, userSurname) {
+      const user = this.finddUser(cardNumber, userName, userSurname);
       let place = null; 
       user.map(el => place = el.park_place_id)
       return place;
     }
 
-    userStudentType() {
-      const user = this.finddUser(this.state.cardNumber, this.state.userName, this.state.userSurname);
+    setUserType(cardNumber, userName, userSurname) {
+      const user = this.finddUser(cardNumber, userName, userSurname);
       let type = ''; 
       user.map(el => type = el.user_type)
-      console.log('TYPE', type);
       return type;
     }
     

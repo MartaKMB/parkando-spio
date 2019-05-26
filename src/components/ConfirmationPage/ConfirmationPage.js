@@ -1,25 +1,24 @@
 import React, { Component } from 'react';
 
 import { withRouter } from "react-router-dom";
-import moment from 'moment';
+// import moment from 'moment';
 
 class ConfirmationPage extends Component {
-    state = {
-        confirm: false,
-    }
+    // state = {
+    //     confirm: false,
+    // }
 
-    setConfirm = () => {
-        this.setState({
-          confirm: true
-        })
-      }
+    // setConfirm = () => {
+    //     this.setState({
+    //       confirm: true
+    //     })
+    //   }
 
     render() {
-        // back to this concept when differen view for user with parking place from begining
-        const date = moment().format('DD.MM.YYYY');
-        const userName = this.props.userName;
-        const userSurname = this.props.userSurname;
-        
+        // back to this concept when different view for user with parking place from begining
+        // const date = moment().format('DD.MM.YYYY');
+        // const userName = this.props.userName;
+        // const userSurname = this.props.userSurname;    
         return (
             <section className="confirmation-container">
                 Wybrałeś miejsce:

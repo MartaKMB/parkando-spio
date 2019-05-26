@@ -7,8 +7,7 @@ class FinalConfirmationPage extends Component {
     render() {
         const date = moment().format('DD.MM.YYYY');
         const userName = this.props.userName;
-        const userSurname = this.props.userSurname;
-        
+        const userSurname = this.props.userSurname;    
         return (
             <section className="confirmation-container confirmation-container--final-view">
                 <div className="confirmation-container__place place">

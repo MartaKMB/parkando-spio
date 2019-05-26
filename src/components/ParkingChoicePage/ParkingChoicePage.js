@@ -4,7 +4,6 @@ import { withRouter } from "react-router-dom";
 
 import emptyPin from '../../images/pusty_pin.png';
 
-
 class ParkingChoicePage extends Component {
     handleClick = (e) => {
         e.preventDefault();
@@ -12,8 +11,6 @@ class ParkingChoicePage extends Component {
     }
 
     render() {
-        console.log('PARKING przekazane occupiedSpaces', this.props.occupiedSpaces);
-        
         return (
             <section className="parking-choice-container">
                 <div className="parking-choice-container__map map">

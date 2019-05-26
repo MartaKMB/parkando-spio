@@ -56,72 +56,71 @@ class App extends Component {
     });
   }
 
-  
-
   render() {      
-  return (
-    <Router history={history} choiceHandler={this.choiceHandler} >
-    <main>
-      <Switch>
-        <Route
-          path="/"
-          render={
-            (props) => 
-              <LoginPage
-                {...props}
-                logUser={this.logUser} 
-                match={matchPath}
-                users={users.parkandoUsers}
-              />
-          }
-          exact />
-        <Route
-          path="/welcome/:userId" 
-          render={(props) => <WelcomePage {...props} userName={this.state.userName} />}
-        />
-        <Route
-          path='/choicePaking/:userId'
-          render={
-            (props) =>
-              <ParkingChoicePage
-                {...props}
-                choiceHandler={this.choiceParkingHandler}
-                occupiedSpaces={
-                  this.state.studentType === 'Dzienny'
-                  ? this.state.occupiedSpacesForDaily
-                  : this.state.occupiedSpacesForWeekends
-                }
-              />}
-        />
-        <Route
-          path='/choice/:userId'
-          render={
-            (props) =>
-              <ChoicePage
-                {...props}
-                choiceHandler={this.choiceHandler}
-                occupiedSpaces={
-                  this.state.studentType === 'Dzienny'
-                  ? this.state.occupiedSpacesForDaily
-                  : this.state.occupiedSpacesForWeekends
-                }
-              />
-          }
-        />
-        <Route
-          path="/confirmation/:userId/:parkingId"
-          render={(props) => <ConfirmationPage {...props} userName={this.state.userName} userSurname={this.state.userSurname} />}
-          match={matchPath}
-        />
-        <Route
-          path="/final-confirmation/:userId/:parkingId"
-          render={(props) => <FinalConfirmationPage {...props} userName={this.state.userName} userSurname={this.state.userSurname} />}
-          match={matchPath}
-        />
-      </Switch>
-    </main>
-  </Router>
-  );
+    return (
+      <Router history={history} choiceHandler={this.choiceHandler} >
+      <main>
+        <Switch>
+          <Route
+            path="/"
+            render={
+              (props) => 
+                <LoginPage
+                  {...props}
+                  logUser={this.logUser} 
+                  match={matchPath}
+                  users={users.parkandoUsers}
+                />
+            }
+            exact 
+          />
+          <Route
+            path="/welcome/:userId" 
+            render={(props) => <WelcomePage {...props} userName={this.state.userName} />}
+          />
+          <Route
+            path='/choicePaking/:userId'
+            render={
+              (props) =>
+                <ParkingChoicePage
+                  {...props}
+                  choiceHandler={this.choiceParkingHandler}
+                  occupiedSpaces={
+                    this.state.studentType === 'Dzienny'
+                    ? this.state.occupiedSpacesForDaily
+                    : this.state.occupiedSpacesForWeekends
+                  }
+                />}
+          />
+          <Route
+            path='/choice/:userId'
+            render={
+              (props) =>
+                <ChoicePage
+                  {...props}
+                  choiceHandler={this.choiceHandler}
+                  occupiedSpaces={
+                    this.state.studentType === 'Dzienny'
+                    ? this.state.occupiedSpacesForDaily
+                    : this.state.occupiedSpacesForWeekends
+                  }
+                />
+            }
+          />
+          <Route
+            path="/confirmation/:userId/:parkingId"
+            render={(props) => <ConfirmationPage {...props} userName={this.state.userName} userSurname={this.state.userSurname} />}
+            match={matchPath}
+          />
+          <Route
+            path="/final-confirmation/:userId/:parkingId"
+            render={(props) => <FinalConfirmationPage {...props} userName={this.state.userName} userSurname={this.state.userSurname} />}
+            match={matchPath}
+          />
+        </Switch>
+      </main>
+    </Router>
+    );
   }
 }
 
