@@ -9,6 +9,7 @@ class LoginPage extends Component {
     userName: '',
     userSurname: '',
     cardNumber: '',
+    userType: '',
     message: '',
     
       errors: {
@@ -43,6 +44,7 @@ class LoginPage extends Component {
       const validation = this.formValidation();
       const finddUser = this.finddUser(this.state.cardNumber, this.state.userName, this.state.userSurname);
       const userPlace = this.userPlaceValidation();
+      const userType = this.userStudentType();
     
       if(validation.correct) {
         if(finddUser.length > 0) {
@@ -51,6 +53,7 @@ class LoginPage extends Component {
             userSurname: '',
             cardNumber: '',
             message: 'Logowanie...',
+            userType: userType,
             errors: {
               userName: false,
               userSurname: false,
@@ -125,6 +128,14 @@ class LoginPage extends Component {
       let place = null; 
       user.map(el => place = el.park_place_id)
       return place;
+    }
+
+    userStudentType() {
+      const user = this.finddUser(this.state.cardNumber, this.state.userName, this.state.userSurname);
+      let type = ''; 
+      user.map(el => type = el.user_type)
+      console.log('TYPE', type);
+      return type;
     }
     
     componentDidUpdate() {

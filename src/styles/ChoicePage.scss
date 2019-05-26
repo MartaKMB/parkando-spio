@@ -38,6 +38,7 @@
             position: absolute;
             left: 100px;
             border-radius: 50%;
+            cursor: pointer;
         }
 
         .btn-place { //TODO!
@@ -79,6 +80,11 @@
 
             &--1 {
                 top: 423px;
+            }
+
+            &--disabled {
+                background-color: grey;
+                cursor: auto;
             }
         }
     }

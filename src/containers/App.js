@@ -17,7 +17,10 @@ class App extends Component {
     user: null,
     userName: '',
     userSurname: '',
-    parkingChoice: null
+    parkingChoice: null,
+    studentType: 'Dzienny',
+    occupiedSpacesForDaily: [],
+    occupiedSpacesForWeekends: [],
   }
 
   choiceHandler = (number) => {
@@ -26,16 +29,36 @@ class App extends Component {
     })
   }
 
-  logUser = (cardNumber, userName, userSurname) => {
+  logUser = (cardNumber, userName, userSurname, studentType) => {
     this.setState({
       user: cardNumber,
       userName: userName,
-      userSurname: userSurname
+      userSurname: userSurname,
+      studentType: studentType
     })
   }
 
-  render() {
-    // console.log('USERS', users.parkandoUsers.map(a => a));    
+  componentWillMount() {
+    let daily = [];
+    let weekends = [];
+
+    users.parkandoUsers.map(a => {
+      if(a.park_place_id !== null) {
+        a.user_type === "Dzienny"
+          ? daily.push(a.park_place_id)
+          : weekends.push(a.park_place_id)
+      }
+    });
+
+    this.setState({
+      occupiedSpacesForDaily: daily,
+      occupiedSpacesForWeekends: weekends,
+    });
+  }
+
+  
+
+  render() {      
   return (
     <Router history={history} choiceHandler={this.choiceHandler} >
     <main>
@@ -58,11 +81,32 @@ class App extends Component {
         />
         <Route
           path='/choicePaking/:userId'
-          render={(props) => <ParkingChoicePage {...props} choiceHandler={this.choiceParkingHandler} />}
+          render={
+            (props) =>
+              <ParkingChoicePage
+                {...props}
+                choiceHandler={this.choiceParkingHandler}
+                occupiedSpaces={
+                  this.state.studentType === 'Dzienny'
+                  ? this.state.occupiedSpacesForDaily
+                  : this.state.occupiedSpacesForWeekends
+                }
+              />}
         />
         <Route
           path='/choice/:userId'
-          render={(props) => <ChoicePage {...props} choiceHandler={this.choiceHandler} />}
+          render={
+            (props) =>
+              <ChoicePage
+                {...props}
+                choiceHandler={this.choiceHandler}
+                occupiedSpaces={
+                  this.state.studentType === 'Dzienny'
+                  ? this.state.occupiedSpacesForDaily
+                  : this.state.occupiedSpacesForWeekends
+                }
+              />
+          }
         />
         <Route
           path="/confirmation/:userId/:parkingId"

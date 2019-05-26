@@ -12,11 +12,13 @@ class ParkingChoicePage extends Component {
     }
 
     render() {
+        console.log('PARKING przekazane occupiedSpaces', this.props.occupiedSpaces);
+        
         return (
             <section className="parking-choice-container">
                 <div className="parking-choice-container__map map">
                     <button className="map__parking-btn parking-btn parking-btn--active parking-btn--active-1" id={1} onClick={this.handleClick}>
-                        <span className="parking-btn__number">10</span>
+                        <span className="parking-btn__number">{7 - this.props.occupiedSpaces.length}</span>
                         <img src={emptyPin} alt='pin wyboru parkingu' />
                     </button>
                     <button className="map__parking-btn parking-btn parking-btn--disabled parking-btn--disabled-1" id={2}>
