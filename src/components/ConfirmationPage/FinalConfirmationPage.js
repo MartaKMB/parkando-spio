@@ -5,7 +5,7 @@ import moment from 'moment';
 
 class FinalConfirmationPage extends Component {
     render() {
-        const date = moment().format('DD.MM.YYYY');
+        const date = moment().add(6, 'd').format('DD.MM.YYYY');
         const userName = this.props.userName;
         const userSurname = this.props.userSurname;    
         return (
