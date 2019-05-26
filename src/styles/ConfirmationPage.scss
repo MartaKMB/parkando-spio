@@ -52,4 +52,40 @@
             background-color: #E04436;
         }
     }
+
+    &--final-view {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    &__place {
+        font-size: 40px;
+        padding: 20px 0;
+    }
+
+    .place {
+        &__number {
+            color: #E04436;     
+        }
+    }
+
+    &__user {
+        font-size: 28px;
+    }
+    
+    &__expiration {
+        padding: 20px 0;
+        font-size: 18px;
+    }
+
+    .expiration {
+        &__date {
+            color: #E04436;
+        }
+    }
+
+    &__enjoy {
+        font-size: 18px;
+        padding: 20px 0;
+    }
 }

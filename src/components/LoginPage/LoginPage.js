@@ -52,7 +52,7 @@ class LoginPage extends Component {
             cardNumber: false,
           }
         })
-        this.props.logUser(this.state.cardNumber, this.state.userName);
+        this.props.logUser(this.state.cardNumber, this.state.userName, this.state.userSurname);
         this.props.history.push(`/welcome/${this.state.cardNumber}`);
 
         } else {

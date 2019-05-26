@@ -16,6 +16,7 @@ class App extends Component {
   state = {
     user: null,
     userName: '',
+    userSurname: '',
     parkingChoice: null
   }
 
@@ -25,10 +26,11 @@ class App extends Component {
     })
   }
 
-  logUser = (cardNumber, userName) => {
+  logUser = (cardNumber, userName, userSurname) => {
     this.setState({
       user: cardNumber,
       userName: userName,
+      userSurname: userSurname
     })
   }
 
@@ -53,7 +55,11 @@ class App extends Component {
           path='/choice/:userId'
           render={(props) => <ChoicePage {...props} choiceHandler={this.choiceHandler} />}
         />
-        <Route path="/confirmation/:userId/:parkingId" component={ConfirmationPage} match={matchPath}/>
+        <Route
+          path="/confirmation/:userId/:parkingId"
+          render={(props) => <ConfirmationPage {...props} userName={this.state.userName} userSurname={this.state.userSurname} />}
+          // component={ConfirmationPage}
+          match={matchPath}/>
       </Switch>
     </main>
   </Router>
