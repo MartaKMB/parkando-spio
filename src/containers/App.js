@@ -3,14 +3,14 @@ import { Router, Route, Switch, matchPath} from 'react-router-dom';
 
 import history from './history';
 
+import users from '../mocks/users.js';
+
 import LoginPage from '../components/LoginPage/LoginPage';
 import WelcomePage from '../components/WelcomePage/WelcomePage';
 import ChoicePage from '../components/ParkingSpaceChoicePage/ChoicePage';
 import ParkingChoicePage from '../components/ParkingChoicePage/ParkingChoicePage';
-
 import ConfirmationPage from '../components/ConfirmationPage/ConfirmationPage';
-
-// const ConfirmationPage = () => <h1>Strona podsumowująca</h1>;
+import FinalConfirmationPage from '../components/ConfirmationPage/FinalConfirmationPage';
 
 class App extends Component {
   state = {
@@ -35,13 +35,22 @@ class App extends Component {
   }
 
   render() {
+    // console.log('USERS', users.parkandoUsers.map(a => a));    
   return (
     <Router history={history} choiceHandler={this.choiceHandler} >
     <main>
       <Switch>
         <Route
           path="/"
-          render={(props) => <LoginPage {...props} logUser={this.logUser} match={matchPath} />}
+          render={
+            (props) => 
+              <LoginPage
+                {...props}
+                logUser={this.logUser} 
+                match={matchPath}
+                users={users.parkandoUsers}
+              />
+          }
           exact />
         <Route
           path="/welcome/:userId" 
@@ -58,8 +67,13 @@ class App extends Component {
         <Route
           path="/confirmation/:userId/:parkingId"
           render={(props) => <ConfirmationPage {...props} userName={this.state.userName} userSurname={this.state.userSurname} />}
-          // component={ConfirmationPage}
-          match={matchPath}/>
+          match={matchPath}
+        />
+        <Route
+          path="/final-confirmation/:userId/:parkingId"
+          render={(props) => <FinalConfirmationPage {...props} userName={this.state.userName} userSurname={this.state.userSurname} />}
+          match={matchPath}
+        />
       </Switch>
     </main>
   </Router>

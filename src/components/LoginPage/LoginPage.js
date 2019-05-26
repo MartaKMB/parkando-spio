@@ -15,6 +15,7 @@ class LoginPage extends Component {
         userName: false,
         userSurname: false,
         cardNumber: false,
+        userInDB: false,
       }
     }
     
@@ -22,6 +23,7 @@ class LoginPage extends Component {
       userNameIncorrect: 'Nazwa musi być dłuższa niż 3 znaki i nie może zawierać spacji',
       userSurnameIncorrect: 'Nazwa musi być dłuższa niż 3 znaki',
       cardNumberIncorrect: 'Numer karty musi zawierać 3 cyfry',
+      noUserInDB: 'Błędny numer karty lub dane użytkownika',
     }
     
     handleChange = e => {
@@ -39,23 +41,44 @@ class LoginPage extends Component {
     handleSubmit = e => {
       e.preventDefault();
       const validation = this.formValidation();
+      const finddUser = this.finddUser(this.state.cardNumber, this.state.userName, this.state.userSurname);
+      const userPlace = this.userPlaceValidation();
     
       if(validation.correct) {
-        this.setState({
-          userName: '',
-          userSurname: '',
-          cardNumber: '',
-          message: 'Logowanie...',
-          errors: {
-            userName: false,
-            userSurname: false,
-            cardNumber: false,
-          }
-        })
-        this.props.logUser(this.state.cardNumber, this.state.userName, this.state.userSurname);
-        this.props.history.push(`/welcome/${this.state.cardNumber}`);
+        if(finddUser.length > 0) {
+          this.setState({
+            userName: '',
+            userSurname: '',
+            cardNumber: '',
+            message: 'Logowanie...',
+            errors: {
+              userName: false,
+              userSurname: false,
+              cardNumber: false,
+            }
+          })
 
+          this.props.logUser(this.state.cardNumber, this.state.userName, this.state.userSurname);
+          
+          if(userPlace === null) {
+            this.props.history.push(`/welcome/${this.state.cardNumber}`);
+          } else {
+            this.props.history.push(`/final-confirmation/${this.state.cardNumber}/${userPlace}`)
+          }
+
+          this.setState({
+            errors: {
+              userInDB: false,
+            }
+          })          
         } else {
+          this.setState({
+            errors: {
+              userInDB: true,
+            }
+          })
+        }
+      } else {
           this.setState({
             errors: {
               userName: !validation.userName,
@@ -92,6 +115,17 @@ class LoginPage extends Component {
         cardNumber,
       })
     }
+
+    finddUser(cardNumber, userName, userSurname) {
+      return this.props.users.filter(user => user.name === userName && user.surname === userSurname && user.card_id === Number(cardNumber));      
+    }
+
+    userPlaceValidation() {
+      const user = this.finddUser(this.state.cardNumber, this.state.userName, this.state.userSurname);
+      let place = null; 
+      user.map(el => place = el.park_place_id)
+      return place;
+    }
     
     componentDidUpdate() {
       if(this.state.message !== '') {
@@ -106,6 +140,7 @@ class LoginPage extends Component {
             <img src={bigLogo} alt="parkando-logo"/>
           </div>
           <form className="login-container__form form" onSubmit={this.handleSubmit} noValidate>
+            {this.state.errors.userInDB && <span className="simple-label__error error--top">{this.messages.noUserInDB}</span>}
             <label htmlFor="number" className="form__simple-label simple-label">Podaj nr karty: 
               <input
                 type="text"
