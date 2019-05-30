@@ -21,6 +21,7 @@ class App extends Component {
     studentType: 'Dzienny',
     occupiedSpacesForDaily: [],
     occupiedSpacesForWeekends: [],
+    contacts: []
   }
 
   choiceHandler = (number) => {
@@ -56,7 +57,14 @@ class App extends Component {
     });
   }
 
-  render() {      
+  componentDidMount() {
+    fetch("https://randomuser.me/api/?format=json&results=5")
+      .then(res => res.json())
+      .then(json => this.setState({ contacts: json.results }));
+  }
+
+  render() {
+    this.state.contacts.map(e => console.log(e));      
     return (
       <Router history={history} choiceHandler={this.choiceHandler} >
       <main>
