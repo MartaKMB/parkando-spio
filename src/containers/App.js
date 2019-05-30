@@ -14,28 +14,28 @@ import FinalConfirmationPage from '../components/ConfirmationPage/FinalConfirmat
 
 class App extends Component {
   state = {
-    user: null,
+    card_id: null,
+    park_place_id: null, // TODO expiration date
+    user_type: 'Dzienny',
     userName: '',
     userSurname: '',
-    parkingChoice: null,
-    studentType: 'Dzienny',
     occupiedSpacesForDaily: [],
     occupiedSpacesForWeekends: [],
-    contacts: []
+    test: []
   }
 
   choiceHandler = (number) => {
     this.setState({
-      parkingChoice: number
+      park_place_id: number
     })
   }
 
-  logUser = (cardNumber, userName, userSurname, studentType) => {
+  logUser = (cardNumber, userName, userSurname, userType) => {
     this.setState({
-      user: cardNumber,
+      card_id: cardNumber,
       userName: userName,
       userSurname: userSurname,
-      studentType: studentType
+      user_type: userType
     })
   }
 
@@ -60,11 +60,11 @@ class App extends Component {
   componentDidMount() {
     fetch("https://randomuser.me/api/?format=json&results=5")
       .then(res => res.json())
-      .then(json => this.setState({ contacts: json.results }));
+      .then(json => this.setState({ test: json.results }));
   }
 
   render() {
-    this.state.contacts.map(e => console.log(e));      
+    this.state.test.map(e => console.log(e));      
     return (
       <Router history={history} choiceHandler={this.choiceHandler} >
       <main>
@@ -83,32 +83,32 @@ class App extends Component {
             exact 
           />
           <Route
-            path="/welcome/:userId" 
+            path="/welcome/:card_id" 
             render={(props) => <WelcomePage {...props} userName={this.state.userName} />}
           />
           <Route
-            path='/choicePaking/:userId'
+            path='/choicePaking/:card_id'
             render={
               (props) =>
                 <ParkingChoicePage
                   {...props}
                   choiceHandler={this.choiceParkingHandler}
                   occupiedSpaces={
-                    this.state.studentType === 'Dzienny'
+                    this.state.user_type === 'Dzienny'
                     ? this.state.occupiedSpacesForDaily
                     : this.state.occupiedSpacesForWeekends
                   }
                 />}
           />
           <Route
-            path='/choice/:userId'
+            path='/choice/:card_id'
             render={
               (props) =>
                 <ChoicePage
                   {...props}
                   choiceHandler={this.choiceHandler}
                   occupiedSpaces={
-                    this.state.studentType === 'Dzienny'
+                    this.state.user_type === 'Dzienny'
                     ? this.state.occupiedSpacesForDaily
                     : this.state.occupiedSpacesForWeekends
                   }
@@ -116,19 +116,19 @@ class App extends Component {
             }
           />
           <Route
-            path="/confirmation/:userId/:parkingId"
+            path="/confirmation/:card_id/:park_place_id"
             render={(props) => <ConfirmationPage {...props} userName={this.state.userName} userSurname={this.state.userSurname} />}
             match={matchPath}
           />
           <Route
-            path="/final-confirmation/:userId/:parkingId"
+            path="/final-confirmation/:card_id/:park_place_id"
             render={
               (props) =>
               <FinalConfirmationPage
                 {...props}
                 userName={this.state.userName}
                 userSurname={this.state.userSurname}
-                userType={this.state.studentType}
+                userType={this.state.user_type}
               />
             }
             match={matchPath}

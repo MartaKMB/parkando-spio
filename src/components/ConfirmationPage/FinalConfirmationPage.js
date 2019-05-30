@@ -11,7 +11,7 @@ class FinalConfirmationPage extends Component {
         return (
             <section className="confirmation-container confirmation-container--final-view">
                 <div className="confirmation-container__place place">
-                    Miejsce <span className="place__number">{this.props.match.params.parkingId}</span>
+                    Miejsce <span className="place__number">{this.props.match.params.park_place_id}</span>
                 </div>
                 <div className="confirmation-container__user">
                     zostało zarezerwowane dla: 

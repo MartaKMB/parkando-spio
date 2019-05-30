@@ -22,17 +22,17 @@ class ConfirmationPage extends Component {
         return (
             <section className="confirmation-container">
                 Wybrałeś miejsce:
-                <div className="confirmation-container__number">{this.props.match.params.parkingId}</div>
+                <div className="confirmation-container__number">{this.props.match.params.park_place_id}</div>
                 <div className="confirmation-container__buttons-section buttons-section">
                     <button
                         className="buttons-section__log-out-btn"
-                        onClick={(e) => {e.preventDefault(); this.props.history.push(`/final-confirmation/${this.props.match.params.userId}/${this.props.match.params.parkingId}`)}}
+                        onClick={(e) => {e.preventDefault(); this.props.history.push(`/final-confirmation/${this.props.match.params.card_id}/${this.props.match.params.park_place_id}`)}}
                     >
                         ZATWIERDŹ
                     </button>
                     <button
                         className="buttons-section__back-btn"
-                        onClick={(e) => {e.preventDefault(); this.props.history.push(`/choicePaking/${this.props.match.params.userId}`)}}
+                        onClick={(e) => {e.preventDefault(); this.props.history.push(`/choicePaking/${this.props.match.params.card_id}`)}}
                     >
                         COFNIJ
                     </button>

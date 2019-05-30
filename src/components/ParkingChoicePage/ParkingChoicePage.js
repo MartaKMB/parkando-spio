@@ -7,7 +7,7 @@ import emptyPin from '../../images/pusty_pin.png';
 class ParkingChoicePage extends Component {
     handleClick = (e) => {
         e.preventDefault();
-        this.props.history.push(`/choice/${this.props.match.params.userId}`)
+        this.props.history.push(`/choice/${this.props.match.params.card_id}`)
     }
 
     render() {

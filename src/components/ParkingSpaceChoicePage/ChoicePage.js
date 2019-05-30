@@ -11,7 +11,7 @@ class ChoicePage extends Component {
         this.props.choiceHandler(number);
         const occupiedSlot = this.checkIfParkingIsOccupied(Number(number));
         if(!occupiedSlot) {
-            this.props.history.push(`/confirmation/${this.props.match.params.userId}/${number}`)    
+            this.props.history.push(`/confirmation/${this.props.match.params.card_id}/${number}`)    
         } else {
             console.log('miejsce jest zajęte: ', number);
         }        

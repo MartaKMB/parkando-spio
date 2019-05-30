@@ -8,14 +8,14 @@ class LoginPage extends Component {
   state = {
     userName: '',
     userSurname: '',
-    cardNumber: '',
-    userType: '',
+    card_id: '',
+    user_type: '',
     message: '',
     
       errors: {
         userName: false,
         userSurname: false,
-        cardNumber: false,
+        card_id: false,
         userInDB: false,
       }
     }
@@ -23,7 +23,7 @@ class LoginPage extends Component {
     messages = {
       userNameIncorrect: 'Nazwa musi być dłuższa niż 3 znaki i nie może zawierać spacji',
       userSurnameIncorrect: 'Nazwa musi być dłuższa niż 3 znaki',
-      cardNumberIncorrect: 'Numer karty musi zawierać 3 cyfry',
+      card_idIncorrect: 'Numer karty musi zawierać 3 cyfry',
       noUserInDB: 'Błędny numer karty lub dane użytkownika',
     }
     
@@ -42,31 +42,31 @@ class LoginPage extends Component {
     handleSubmit = e => {
       e.preventDefault();
       const validation = this.formValidation();
-      const finddUser = this.finddUser(this.state.cardNumber, this.state.userName, this.state.userSurname);
-      const userPlace = this.userParkingSpaceValidation(this.state.cardNumber, this.state.userName, this.state.userSurname);
-      const userType = this.setUserType(this.state.cardNumber, this.state.userName, this.state.userSurname);
+      const finddUser = this.finddUser(this.state.card_id, this.state.userName, this.state.userSurname);
+      const park_place_id = this.userParkingSpaceValidation(this.state.card_id, this.state.userName, this.state.userSurname);
+      const user_type = this.setUserType(this.state.card_id, this.state.userName, this.state.userSurname);
     
       if(validation.correct) {
         if(finddUser.length > 0) {
           this.setState({
             userName: '',
             userSurname: '',
-            cardNumber: '',
+            card_id: '',
             message: 'Logowanie...',
-            userType: userType,
+            user_type: user_type,
             errors: {
               userName: false,
               userSurname: false,
-              cardNumber: false,
+              card_id: false,
             }
           })
 
-          this.props.logUser(this.state.cardNumber, this.state.userName, this.state.userSurname);
+          this.props.logUser(this.state.card_id, this.state.userName, this.state.userSurname);
           
-          if(userPlace === null) {
-            this.props.history.push(`/welcome/${this.state.cardNumber}`);
+          if(park_place_id === null) {
+            this.props.history.push(`/welcome/${this.state.card_id}`);
           } else {
-            this.props.history.push(`/final-confirmation/${this.state.cardNumber}/${userPlace}`)
+            this.props.history.push(`/final-confirmation/${this.state.card_id}/${park_place_id}`)
           }
 
           this.setState({
@@ -86,7 +86,7 @@ class LoginPage extends Component {
           errors: {
             userName: !validation.userName,
             userSurname: !validation.userSurname,
-            cardNumber: !validation.cardNumber,
+            card_id: !validation.card_id,
           }
         })
       }
@@ -95,7 +95,7 @@ class LoginPage extends Component {
     formValidation = () => {
       let userName = false;
       let userSurname = false;
-      let cardNumber = false;
+      let card_id = false;
       let correct = false;
     
       if(this.state.userName.length > 3 && this.state.userName.indexOf(' ') === -1) {
@@ -104,10 +104,10 @@ class LoginPage extends Component {
       if(this.state.userSurname.length > 3) {
         userSurname = true;
       }
-      if(this.state.cardNumber.length === 3 && !isNaN(this.state.cardNumber)) {
-        cardNumber = true;
+      if(this.state.card_id.length === 3 && !isNaN(this.state.card_id)) {
+        card_id = true;
       }
-      if(userName && userSurname && cardNumber) {
+      if(userName && userSurname && card_id) {
         correct = true;
       }
     
@@ -115,7 +115,7 @@ class LoginPage extends Component {
         correct,
         userName,
         userSurname,
-        cardNumber,
+        card_id,
       })
     }
 
@@ -156,12 +156,12 @@ class LoginPage extends Component {
               <input
                 type="text"
                 id="number"
-                name="cardNumber"
-                value={this.state.cardNumber}
+                name="card_id"
+                value={this.state.card_id}
                 onChange={this.handleChange}
                 className="simple-label__input"
               />
-              {this.state.errors.cardNumber && <span className="simple-label__error">{this.messages.cardNumberIncorrect}</span>}
+              {this.state.errors.card_id && <span className="simple-label__error">{this.messages.card_idIncorrect}</span>}
             </label>
             <label htmlFor="name" className="form__simple-label simple-label">Imię: 
               <input
