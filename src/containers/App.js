@@ -12,6 +12,7 @@ import ChoicePage from '../components/ParkingChoicePage/ChoicePage';
 import ParkingChoicePage from '../components/ParkingChoicePage/ParkingChoicePage';
 import ConfirmationPage from '../components/ConfirmationPage/ConfirmationPage';
 import FinalConfirmationPage from '../components/ConfirmationPage/FinalConfirmationPage';
+import FinalConfirmationWithTwoReservation from '../components/ConfirmationPage/FinalConfirmationWithTwoReservation';
 
 import DayChoicePage from '../components/DayChoicePage/DayChoicePage';
 
@@ -151,6 +152,21 @@ class App extends Component {
               <DayChoicePage
                 {...props}
                 userType={this.state.user_type}
+              />
+            }
+            match={matchPath}
+          />
+          <Route
+            path="/two-reservation/:card_id/:extra_place/:park_place_id"
+            render={
+              (props) =>
+              <FinalConfirmationWithTwoReservation
+                {...props}
+                userName={this.state.userName}
+                userSurname={this.state.userSurname}
+                userType={this.state.user_type}
+                expirationDate={this.state.expiration_date}
+                placeId={this.state.park_place_id}
               />
             }
             match={matchPath}

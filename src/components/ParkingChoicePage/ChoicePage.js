@@ -11,7 +11,7 @@ class ChoicePage extends Component {
         //TODO POST
         e.preventDefault();
         const number = e.target.id;
-        this.props.choiceHandler(number);
+        Number(this.props.match.params.extra_place) === 0 && this.props.choiceHandler(number);
         const occupiedSlot = this.checkIfParkingIsOccupied(Number(number));
         if(!occupiedSlot) {
             this.props.history.push(`/confirmation/${this.props.match.params.card_id}/${this.props.match.params.extra_place}/${number}`)    
