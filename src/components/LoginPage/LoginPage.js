@@ -124,7 +124,9 @@ class LoginPage extends Component {
     // TODO findUser, userParkingSpaceValidation, setUserType probably remove or modified when backend is in
     findUser(cardNumber, userName, userSurname) {
       return this.props.users.filter(user =>
-        user.name === userName && user.surname === userSurname && user.card_id === Number(cardNumber));      
+        user.name.toLowerCase() === userName.toLowerCase()
+        && user.surname.toLowerCase() === userSurname.toLowerCase()
+        && user.card_id === Number(cardNumber));      
     }
 
     userParkingSpaceValidation(cardNumber, userName, userSurname) {
