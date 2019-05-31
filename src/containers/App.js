@@ -19,7 +19,7 @@ class App extends Component {
   state = {
     card_id: null,
     park_place_id: null,
-    user_type: 'Dzienny',
+    user_type: '',
     expiration_date: moment().add(6, 'd').format('DD.MM.YYYY'),
     userName: '',
     userSurname: '',
@@ -41,7 +41,7 @@ class App extends Component {
       user_type: userType,
       userName: userName,
       userSurname: userSurname
-    })
+    });    
   }
 
   componentWillMount() {
@@ -72,7 +72,9 @@ class App extends Component {
 
   render() {
     // TODO remove when backend is in
-    this.state.test.map(e => console.log(e));      
+    this.state.test.map(e => console.log(e));    
+    console.log('TYPE IN APP:', this.state.user_type);
+  
     return (
       <Router history={history} choiceHandler={this.choiceHandler} >
       <main>
@@ -95,7 +97,7 @@ class App extends Component {
             render={(props) => <WelcomePage {...props} userName={this.state.userName} />}
           />
           <Route
-            path='/choicePaking/:card_id'
+            path='/choicePaking/:card_id/:extra_place'
             render={
               (props) =>
                 <ParkingChoicePage
@@ -109,7 +111,7 @@ class App extends Component {
                 />}
           />
           <Route
-            path='/choice/:card_id'
+            path='/choice/:card_id/:extra_place'
             render={
               (props) =>
                 <ChoicePage
@@ -124,12 +126,12 @@ class App extends Component {
             }
           />
           <Route
-            path="/confirmation/:card_id/:park_place_id"
+            path="/confirmation/:card_id/:extra_place/:park_place_id"
             render={(props) => <ConfirmationPage {...props} userName={this.state.userName} userSurname={this.state.userSurname} />}
             match={matchPath}
           />
           <Route
-            path="/final-confirmation/:card_id/:park_place_id"
+            path="/final-confirmation/:card_id/:extra_place/:park_place_id"
             render={
               (props) =>
               <FinalConfirmationPage

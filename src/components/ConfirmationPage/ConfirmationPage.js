@@ -26,7 +26,7 @@ class ConfirmationPage extends Component {
                 <div className="confirmation-container__buttons-section buttons-section">
                     <button
                         className="buttons-section__log-out-btn"
-                        onClick={(e) => {e.preventDefault(); this.props.history.push(`/final-confirmation/${this.props.match.params.card_id}/${this.props.match.params.park_place_id}`)}}
+                        onClick={(e) => {e.preventDefault(); this.props.history.push(`/final-confirmation/${this.props.match.params.card_id}/${this.props.match.params.extra_place}/${this.props.match.params.park_place_id}`)}}
                     >
                         ZATWIERDŹ
                     </button>

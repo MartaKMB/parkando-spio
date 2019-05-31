@@ -1,9 +1,9 @@
 export default {
-    pon: [7,8],
+    pon: [8, 9],
     wt: [],
-    sr: [7,8,9],
+    sr: [8,9,10],
     czw: [],
     pt: [],
-    sob: [7,8,9],
+    sob: [8,9,10],
     niedz: [9]
 };

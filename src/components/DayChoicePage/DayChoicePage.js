@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import classNames from 'classnames';
 
 import { withRouter } from "react-router-dom";
 
@@ -46,7 +45,7 @@ class DayChoicePage extends Component {
             this.setState({
                 selectedDay: e.target.id
             })
-            this.props.history.push(`/choice/${e.target.id}/${this.props.match.params.card_id}`)    
+            this.props.history.push(`/choicePaking/${this.props.match.params.card_id}/${e.target.id}`)    
         } else {
             console.log('nie ma miejsc');  
         }
@@ -76,22 +75,22 @@ class DayChoicePage extends Component {
                             handleClick={this.handleClick}
                         />
                         <SingleDayButton
-                            isNoPlace={3 - this.state.sob.length === 0}
+                            isNoPlace={3 - this.state.wt.length === 0}
                             dayNum={2}
                             handleClick={this.handleClick}
                         />
                         <SingleDayButton
-                            isNoPlace={3 - this.state.sob.length === 0}
+                            isNoPlace={3 - this.state.sr.length === 0}
                             dayNum={3}
                             handleClick={this.handleClick}
                         />
                         <SingleDayButton
-                            isNoPlace={3 - this.state.sob.length === 0}
+                            isNoPlace={3 - this.state.czw.length === 0}
                             dayNum={4}
                             handleClick={this.handleClick}
                         />
                         <SingleDayButton
-                            isNoPlace={3 - this.state.sob.length === 0}
+                            isNoPlace={3 - this.state.pt.length === 0}
                             dayNum={5}
                             handleClick={this.handleClick}
                         />

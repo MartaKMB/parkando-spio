@@ -46,6 +46,8 @@ class LoginPage extends Component {
       const findUser = this.findUser(this.state.card_id, this.state.userName, this.state.userSurname);
       const park_place_id = this.userParkingSpaceValidation(this.state.card_id, this.state.userName, this.state.userSurname);
       const user_type = this.setUserType(this.state.card_id, this.state.userName, this.state.userSurname);
+      console.log('userTYPE: ', user_type);
+      
     
       if(validation.correct) {
         //TODO GET
@@ -63,12 +65,12 @@ class LoginPage extends Component {
             }
           })
 
-          this.props.logUser(this.state.card_id, this.state.userName, this.state.userSurname);
+          this.props.logUser(this.state.card_id, this.state.userName, this.state.userSurname, this.state.user_type);
           
           if(park_place_id === null) {
             this.props.history.push(`/welcome/${this.state.card_id}`);
           } else {
-            this.props.history.push(`/final-confirmation/${this.state.card_id}/${park_place_id}`)
+            this.props.history.push(`/final-confirmation/${this.state.card_id}/0/${park_place_id}`)
           }
 
           this.setState({
@@ -139,7 +141,9 @@ class LoginPage extends Component {
     setUserType(cardNumber, userName, userSurname) {
       const user = this.findUser(cardNumber, userName, userSurname);
       let type = ''; 
-      user.map(el => type = el.user_type)
+      user.map(el => type = el.user_type);
+      // console.log('TYPE: ', type);
+      
       return type;
     }
     

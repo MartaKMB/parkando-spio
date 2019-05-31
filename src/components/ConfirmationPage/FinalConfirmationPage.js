@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 
 class FinalConfirmationPage extends Component {    
     render() {
+        console.log('this.props.userType: ', this.props.userType);
         return (
             <section className="confirmation-container confirmation-container--final-view">
                 <div className="confirmation-container__place place">
