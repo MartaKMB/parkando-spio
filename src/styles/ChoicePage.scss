@@ -10,7 +10,6 @@
     align-items: center;
 
     &__map-details {
-        // background: url('../images/parking_szcz.jpg') no-repeat center center fixed;
         background: url('../images/parking_limit.png') no-repeat center;
         max-width: 360px;
         width: 100%;
@@ -39,7 +38,7 @@
             cursor: pointer;
         }
 
-        .btn-place { //TODO!
+        .btn-place {
             // &--1 {
             //     top: -6px;
             // }

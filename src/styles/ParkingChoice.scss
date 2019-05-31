@@ -30,6 +30,7 @@
             background: transparent;
             border: none;
             outline: none;
+            cursor: pointer;
 
             img {
                 width: 100%;
@@ -54,6 +55,7 @@
 
             &--disabled {
                 pointer-events: none;
+                cursor: auto;
             }
 
             &--active-1 {
