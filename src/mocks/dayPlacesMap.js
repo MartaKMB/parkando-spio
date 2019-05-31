@@ -5,5 +5,5 @@ export default {
     czw: [],
     pt: [],
     sob: [7,8,9],
-    niedz: [7,8,9]
+    niedz: [9]
 };

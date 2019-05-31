@@ -5,6 +5,8 @@ import { withRouter } from "react-router-dom";
 
 import dayPlacesMap from '../../mocks/dayPlacesMap.js';
 
+import SingleDayButton from './SingleDayButton.js';
+
 class DayChoicePage extends Component {
     state = {
         pon: [],
@@ -39,11 +41,15 @@ class DayChoicePage extends Component {
     handleClick = (e) => {
         e.preventDefault();
         // set day in App
-        console.log('KLIK', e.target.id);
-        this.setState({
-            selectedDay: e.target.id
-        })
-        this.props.history.push(`/choice/${e.target.id}/${this.props.match.params.card_id}`)
+        console.log('KLIK', e.target);
+        if(!e.target.classList.contains('day-btn--disabled')){
+            this.setState({
+                selectedDay: e.target.id
+            })
+            this.props.history.push(`/choice/${e.target.id}/${this.props.match.params.card_id}`)    
+        } else {
+            console.log('nie ma miejsc');  
+        }
     }
 
     render() {
@@ -52,37 +58,43 @@ class DayChoicePage extends Component {
                 Wybierz dzień
                 {this.props.userType === "Dzienny"
                     ? <div className="day-choice-container__day-buttons day-buttons">
-                        <button
-                            className={classNames('day-buttons__day-btn', 'day-btn', {'day-btn--disabled' : 3 - this.state.sob.length === 0})}
-                            id={6}
-                            onClick={this.handleClick}
-                        >
-                            SOBOTA
-                        </button>
-                        <button className="day-buttons__day-btn" id={7} onClick={this.handleClick}>
-                            NIEDZIELA
-                        </button>
+                        <SingleDayButton
+                            isNoPlace={3 - this.state.sob.length === 0}
+                            dayNum={6}
+                            handleClick={this.handleClick}
+                        />
+                        <SingleDayButton
+                            isNoPlace={3 - this.state.niedz.length === 0}
+                            dayNum={7}
+                            handleClick={this.handleClick}
+                        />
                     </div>
                     : <div className="day-choice-container__day-buttons day-buttons">
-                        <button
-                            className={classNames('day-buttons__day-btn', 'day-btn', {'day-btn--disabled' : 3 - this.state.pon.length === 0})}
-                            id={1}
-                            onClick={this.handleClick}
-                        >
-                            PONIEDZIAŁEK
-                        </button>
-                        <button className="day-buttons__day-btn" id={2} onClick={this.handleClick}>
-                            WTOREK
-                        </button>
-                        <button className="day-buttons__day-btn" id={3} onClick={this.handleClick}>
-                            ŚRODA
-                        </button>
-                        <button className="day-buttons__day-btn" id={4} onClick={this.handleClick}>
-                            CZWARTEK
-                        </button>
-                        <button className="day-buttons__day-btn" id={5} onClick={this.handleClick}>
-                            PIĄTEK
-                        </button>
+                        <SingleDayButton
+                            isNoPlace={3 - this.state.pon.length === 0}
+                            dayNum={1}
+                            handleClick={this.handleClick}
+                        />
+                        <SingleDayButton
+                            isNoPlace={3 - this.state.sob.length === 0}
+                            dayNum={2}
+                            handleClick={this.handleClick}
+                        />
+                        <SingleDayButton
+                            isNoPlace={3 - this.state.sob.length === 0}
+                            dayNum={3}
+                            handleClick={this.handleClick}
+                        />
+                        <SingleDayButton
+                            isNoPlace={3 - this.state.sob.length === 0}
+                            dayNum={4}
+                            handleClick={this.handleClick}
+                        />
+                        <SingleDayButton
+                            isNoPlace={3 - this.state.sob.length === 0}
+                            dayNum={5}
+                            handleClick={this.handleClick}
+                        />
                     </div>
                 }
                 {this.state.noPlace && <span>PRZYKRO NAM NIE MA JUŻ WOLNYCH MIEJSC</span>}
