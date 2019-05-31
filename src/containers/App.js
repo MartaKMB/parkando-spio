@@ -13,6 +13,8 @@ import ParkingChoicePage from '../components/ParkingChoicePage/ParkingChoicePage
 import ConfirmationPage from '../components/ConfirmationPage/ConfirmationPage';
 import FinalConfirmationPage from '../components/ConfirmationPage/FinalConfirmationPage';
 
+import DayChoicePage from '../components/DayChoicePage/DayChoicePage';
+
 class App extends Component {
   state = {
     card_id: null,
@@ -136,6 +138,17 @@ class App extends Component {
                 userSurname={this.state.userSurname}
                 userType={this.state.user_type}
                 expirationDate={this.state.expiration_date}
+              />
+            }
+            match={matchPath}
+          />
+          <Route
+            path="/day-choice/:card_id"
+            render={
+              (props) =>
+              <DayChoicePage
+                {...props}
+                userType={this.state.user_type}
               />
             }
             match={matchPath}
